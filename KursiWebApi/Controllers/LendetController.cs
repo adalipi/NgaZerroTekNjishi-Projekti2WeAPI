@@ -2,6 +2,7 @@
 using KursiDatabase.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KursiWebApi.Controllers
 {
@@ -37,7 +38,14 @@ namespace KursiWebApi.Controllers
         {
             return await _repository.Get(id, token);//spjego async await
         }
-
+        
+        
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<Lendet> MerrLendenDheStudentet(int id, CancellationToken token)//spjego cancelation token
+        {
+            return await _repository.GetAll().Include(f => f.Klasa).Include(f => f.Studentet).FirstOrDefaultAsync(lenda => lenda.Id == id, token);//spjego async await
+        }
 
     }
 }

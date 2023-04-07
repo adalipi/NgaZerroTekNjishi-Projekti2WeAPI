@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KursiDatabase.Context
 {
@@ -18,7 +19,10 @@ namespace KursiDatabase.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Lendet>();
+            modelBuilder.Entity<Studenti>();
+            modelBuilder.Entity<Lendet>().HasMany(m => m.Studentet).WithMany(s => s.LendetEStudentit).UsingEntity("LendetDheStudentet");//emri i tabeles se lidhjes
+            modelBuilder.Entity<Klasa>();
+
         }
     }
 }
