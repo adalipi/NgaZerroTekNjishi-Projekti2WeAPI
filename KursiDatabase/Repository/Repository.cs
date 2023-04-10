@@ -19,17 +19,20 @@ namespace KursiDatabase.Repository
         }
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
         }
 
-        public Task Delete(int id, CancellationToken token)
+        public async Task Delete(int id, CancellationToken token)
         {
-            throw new NotImplementedException();
+            var objToRemove = await Get(id, token);
+            _context.Remove(objToRemove);
         }
 
         public async Task<T?> Get(int id, CancellationToken token)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(f => f.Id == id, token);
+            //return await _context.Set<T>().FirstOrDefaultAsync(f => f.Id == id, token);
+
+            throw new NotImplementedException("nuk eshte implementuar");
         }
 
         public IQueryable<T> GetAll()
@@ -37,14 +40,14 @@ namespace KursiDatabase.Repository
             return _context.Set<T>().AsQueryable();
         }
 
-        public Task SaveAsync(CancellationToken token)
+        public async Task SaveAsync(CancellationToken token)
         {
-            throw new NotImplementedException();
+           await _context.SaveChangesAsync(token);
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
         }
     }
 }

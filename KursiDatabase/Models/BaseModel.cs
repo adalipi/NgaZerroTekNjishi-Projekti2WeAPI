@@ -10,6 +10,12 @@ namespace KursiDatabase.Models
 {
     public abstract class BaseModel
     {
+        public BaseModel()
+        {
+            this.DataKrijimit = DateTime.Now;
+            this.DataNdryshimit = DateTime.Now;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
