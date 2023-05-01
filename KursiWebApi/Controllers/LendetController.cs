@@ -31,19 +31,6 @@ namespace KursiWebApi.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("[action]")]
-        public TestKlas GetTest()
-        {
-            _logger.LogInformation("testi i pare");
-            _logger.LogDebug("testi i pare Debug");
-
-            var obj = new TestKlas();
-            obj.mosha= 19;
-            obj.emri = "Filan";
-
-            return obj;
-        }
-
         [AllowAnonymous]
         [HttpGet]
         [Route("[action]/{id}")]
@@ -69,32 +56,5 @@ namespace KursiWebApi.Controllers
             _logger.LogInformation($"Regjistruam klasen me emrin: {lenda.Emri}.");
             return Ok();
         }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("[action]")]
-        public string Login(AuthRequestObject authObj, CancellationToken cancellationtoken)
-        {
-            if(authObj.Username == "ari" && authObj.Password == "dalipi") 
-            {
-                if (!int.TryParse(_configuration["Jwt:Expiration"], out int exp))
-                    exp = 20;
-
-                var expiry = DateTime.Now.AddMinutes(int.Parse(_configuration["Jwt:Expiration"]));
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var token = new JwtSecurityToken(
-                    _configuration["Jwt:Issuer"],
-                    _configuration["Jwt:Issuer"],
-                    null,
-                    expires: expiry,
-                    signingCredentials: signIn);
-
-                return new JwtSecurityTokenHandler().WriteToken(token);
-            }
-
-            return "";
-        }
-
     }
 }

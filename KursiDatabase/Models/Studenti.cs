@@ -12,6 +12,12 @@ namespace KursiDatabase.Models
     public class Studenti : BaseModel
     {
         [Required]
+        public string Email { get; set; }
+
+        [Required]
+        public string Fjalkalimi { get; set; }
+
+        [Required]
         public string Emri { get; set; }
 
         [Required]

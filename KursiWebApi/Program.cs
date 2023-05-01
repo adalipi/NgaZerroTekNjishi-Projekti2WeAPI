@@ -24,6 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IKlasaService, KlasaService>();
 builder.Services.AddScoped<ILendetService, LendetService>();
+builder.Services.AddScoped<IStudentiService, StudentiService>();
 
 builder.Services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
 
