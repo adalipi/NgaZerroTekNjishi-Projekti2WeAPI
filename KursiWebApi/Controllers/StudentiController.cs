@@ -33,6 +33,14 @@ namespace KursiWebApi.Controllers
             return Ok(await _studentService.GjitheStudentet(token));
         }
 
+        [Authorize]
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> MerrStudentetAuth(CancellationToken token)
+        {
+            return Ok(await _studentService.GjitheStudentet(token));
+        }
+
         //[HttpGet]
         //[Route("[action]")]
         //public async Task<IActionResult> MTake()

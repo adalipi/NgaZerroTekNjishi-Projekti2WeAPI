@@ -45,7 +45,7 @@ namespace KursiWebApi.Controllers
                     expires: expiry,
                     signingCredentials: signIn);
 
-                return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                return Ok(new TokenDTO { Token = new JwtSecurityTokenHandler().WriteToken(token) });
             }
 
             return BadRequest();
